@@ -171,6 +171,7 @@ async function removerAluno() {
         return
     }
 }
+
 async function cadastrarNotas() {
 
     const interfaceNotas = await rl.question('PARA REGISTRAR NOTAS APERTE (1)\nPARA SAIR APERTE (2)\n\nDigite: ');
@@ -181,7 +182,6 @@ async function cadastrarNotas() {
             return;
         }
         const idAlterar = await rl.question('Digite o ID do aluno que deseja alterar: ');
-
         for (let i = 0; i < alunos.length; i++) {
             if (alunos[i].id == idAlterar) {
                 linhaEmbaixo('\nMATEMÁTICA\nLINGUA PORTUGUÊSA\nHISTÓRIA\nFISÍCA\nBIOLOGIA\nQUÍMICA\nGEOGRAFIA\nFILOSOFIA\nSOCIOLOGIA\nLINGUAS ESTRANGEIRAS\nDigite a matéria que deseja cadastrar notas: ');
@@ -346,7 +346,9 @@ async function cadastrarNotas() {
                 }
                 if (escolherMateria == 'geografia') {
                     console.clear();
+                    
                     const selecionarBimestre = await rl.question('1 Semestre, 2 Semestre\nDigite: ');
+
                     if (selecionarBimestre == '1') {
                         let notaGeografia1 = await rl.question('Digite a nota que o Aluno teve no 1 Semestre em Geografia: ');
                         notaGeografia1 = parseInt(notaGeografia1);
@@ -450,14 +452,13 @@ async function cadastrarNotas() {
                 }
             }
         }
-    }
-    await salvarDados();
-
-    if (interfaceNotas == '2') {
+    } else if (interfaceNotas == '2') {
         return;
     } else {
         mostrarVermelho('Opção inválida! Tente novamente.');
     }
+
+    await salvarDados();
 }
 
 async function verNotas() {
